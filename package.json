@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@graphql-codegen/typescript": "^2.1.0"
+  },
+  "dependencies": {
+    "gatsby-plugin-graphql-codegen": "^3.0.0",
+    "gatsby-plugin-typegen": "^2.2.4"
+  }
+}

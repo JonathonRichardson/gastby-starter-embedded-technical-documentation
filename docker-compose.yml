@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+    gatsby-dev:
+        build:
+            context: "."
+            dockerfile: "./build/Dockerfile"
+        environment:
+            VIRTUAL_PORT: 80
+        expose:
+            - 9999
+        ports:
+            - '9999:9999'
+        # extends:
+        #     file: docker-compose.common.yml
+        #     service: app
+        #image: ubuntu
+        volumes:
+            - './src/gatsby-docs:/app'

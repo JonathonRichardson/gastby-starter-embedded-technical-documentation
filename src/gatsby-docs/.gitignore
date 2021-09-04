@@ -1,0 +1,17 @@
+public
+.cache
+node_modules
+*DS_Store
+*.env
+
+.idea/
+
+
+# Ignore the yarn cache (https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored)
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
