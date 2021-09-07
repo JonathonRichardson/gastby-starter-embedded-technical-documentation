@@ -1,9 +1,13 @@
 ---
-title: "Writing Documentation"
+title: "About This Documentation"
 metaTitle: "Meta information on this documentation"
 metaDescription: ""
 collapsedByDefault: true
+navOrder: 0
 ---
+
+This site contains the documentation for.
+
 
 The Gatsby docs are stored inside the source controlled repository, and should include any instructions or information regarding the project that could potentially change with additional PRs.
 
