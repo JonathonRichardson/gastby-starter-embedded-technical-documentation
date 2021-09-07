@@ -1,0 +1,19 @@
+---
+title: "How MDX is Configured in Gatsby"
+metaTitle: ""
+metaDescription: ""
+collapsedByDefault: true
+navOrder: 30
+---
+
+This page provides the gritty details of how the mdx files end up as pages.  If you're just looking to write documentation, you don't need this information.
+
+This is only really valuable if you want to hack on the starter/template itself.
+
+# Overview
+
+The `gatsby-config.ts` iterates over all the books defined in the `content/books.ts`, as well as the blog folder (which is hard coded there), and adds those folders with the `gatsby-source-filesystem`.  This makes these files available in graphql under the top level object `allFile`.
+
+Then, we also include the `gatsby-plugin-mdx`, which maps these into the `allMdx` node in graphql.
+
+This then needs to get turned into nodes and pages.  The new pages are created in the `createPages` method of `gatsby-node.js`.  This function queries the current mdx files and creates a page for each node, which consists of the component template to use to render the page (e.g. `BlogPageTemplate.tsx` for blog pages and `MDXDocumentTemplate.mdx` for regular book pages) and a little metadata.

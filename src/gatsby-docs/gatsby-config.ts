@@ -15,9 +15,9 @@ const plugins: GatsbyConfig['plugins'] = [
 ];
 
 // Now, add a "gatsby-source-filesystem" plugin for each document.
-import { Documents } from './content/docs';
+import { Books } from './content/books';
 
-for (let document_code in Documents) {
+for (let document_code in Books) {
     plugins.push({
         resolve: 'gatsby-source-filesystem',
         options: {

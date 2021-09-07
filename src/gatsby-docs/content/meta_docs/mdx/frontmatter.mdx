@@ -30,7 +30,7 @@ The following table lists the available keys in this template:
 |metaDescription|No|Defaults to "".  This is added as a meta property to the `<head>` of the page and will appear as the summary of the page when sharing it via social media or when previewed by apps that allow previewing links (like slack).|
 |collapsedByDefault|No|Deaults to false.  If set to true, and this page has child pages, this will cause the children to not appear by default in the nav tree, unless the user clicks on this header.|
 |navOrder|No|This controls the order that pages will appear in the nav tree.  Explicitely set values will sort first, in numerical order, followed by everything else sorted alphabetically by title.|
-
+|date|Yes (only for blog posts)|The date for the blog post.
 ## Advanced
 
 The frontmatter section is pretty flexible, and you can add any additional keys you want, which will get picked up by gatsby and added as fields available to query via graphql.  Be careful, though, because they are inferred from usage, which means that if no content has that frontmatter key, it won't exist in the graphql structure and your queries will fail.

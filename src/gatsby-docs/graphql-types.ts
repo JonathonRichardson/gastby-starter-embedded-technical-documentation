@@ -337,9 +337,9 @@ export type MdxFrontmatter = {
   title: Scalars['String'];
   metaTitle?: Maybe<Scalars['String']>;
   metaDescription?: Maybe<Scalars['String']>;
-  date?: Maybe<Scalars['Date']>;
   collapsedByDefault?: Maybe<Scalars['Boolean']>;
   navOrder?: Maybe<Scalars['Int']>;
+  date?: Maybe<Scalars['Date']>;
 };
 
 
@@ -890,9 +890,9 @@ export type MdxFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
   metaTitle?: Maybe<StringQueryOperatorInput>;
   metaDescription?: Maybe<StringQueryOperatorInput>;
-  date?: Maybe<DateQueryOperatorInput>;
   collapsedByDefault?: Maybe<BooleanQueryOperatorInput>;
   navOrder?: Maybe<IntQueryOperatorInput>;
+  date?: Maybe<DateQueryOperatorInput>;
 };
 
 export type BooleanQueryOperatorInput = {
@@ -1051,9 +1051,9 @@ export type FileFieldsEnum =
   | 'childrenMdx___frontmatter___title'
   | 'childrenMdx___frontmatter___metaTitle'
   | 'childrenMdx___frontmatter___metaDescription'
-  | 'childrenMdx___frontmatter___date'
   | 'childrenMdx___frontmatter___collapsedByDefault'
   | 'childrenMdx___frontmatter___navOrder'
+  | 'childrenMdx___frontmatter___date'
   | 'childrenMdx___slug'
   | 'childrenMdx___body'
   | 'childrenMdx___excerpt'
@@ -1114,9 +1114,9 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___title'
   | 'childMdx___frontmatter___metaTitle'
   | 'childMdx___frontmatter___metaDescription'
-  | 'childMdx___frontmatter___date'
   | 'childMdx___frontmatter___collapsedByDefault'
   | 'childMdx___frontmatter___navOrder'
+  | 'childMdx___frontmatter___date'
   | 'childMdx___slug'
   | 'childMdx___body'
   | 'childMdx___excerpt'
@@ -2336,9 +2336,9 @@ export type MdxFieldsEnum =
   | 'frontmatter___title'
   | 'frontmatter___metaTitle'
   | 'frontmatter___metaDescription'
-  | 'frontmatter___date'
   | 'frontmatter___collapsedByDefault'
   | 'frontmatter___navOrder'
+  | 'frontmatter___date'
   | 'slug'
   | 'body'
   | 'excerpt'
