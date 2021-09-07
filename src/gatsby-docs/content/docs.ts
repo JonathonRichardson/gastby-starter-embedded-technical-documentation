@@ -2,11 +2,11 @@ export interface IDocumentInfo {
     title: string;
 }
 
-export type DocumentCode = 'documentation' | 'getting_started' | 'how_tos';
+export type DocumentCode = 'meta_docs' | 'getting_started' | 'how_tos';
 
 export const Documents: { [key in DocumentCode]: IDocumentInfo } = {
-    documentation: {
-        title: 'Developer Documentation',
+    meta_docs: {
+        title: 'About the Documentation Site',
     },
     getting_started: {
         title: 'Getting Started',
