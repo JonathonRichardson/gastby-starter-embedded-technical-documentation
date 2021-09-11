@@ -4,7 +4,7 @@ export interface IDocumentInfo {
 
 export type BookCode = 'meta_docs' | 'getting_started' | 'how_tos';
 
-export const Books: { [key in BookCode]: IDocumentInfo } = {
+export const Guides: { [key in BookCode]: IDocumentInfo } = {
     meta_docs: {
         title: 'About the Documentation Site',
     },
