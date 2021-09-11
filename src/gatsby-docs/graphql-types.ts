@@ -333,6 +333,26 @@ export type SitePageContext = {
   document?: Maybe<Scalars['String']>;
 };
 
+export type LocalSearchPages = Node & {
+  /** The name of the index. */
+  name: Scalars['String'];
+  /** The search engine used to create the index. */
+  engine: Scalars['String'];
+  /** The search index created using the selected engine. */
+  index: Scalars['String'];
+  /** A JSON object used to map search results to their data. */
+  store: Scalars['JSON'];
+  /** Save the index to the site's static directory and return a public URL to it. */
+  publicIndexURL: Scalars['String'];
+  /** Save the store to the site's static directory and return a public URL to it. */
+  publicStoreURL: Scalars['String'];
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
 export type MdxFrontmatter = {
   title: Scalars['String'];
   metaTitle?: Maybe<Scalars['String']>;
@@ -405,31 +425,11 @@ export type MdxTableOfContentsArgs = {
   maxDepth?: Maybe<Scalars['Int']>;
 };
 
-
 export type MdxFields = {
   slug?: Maybe<Scalars['String']>;
   document?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-};
-
-export type LocalSearchPages = Node & {
-  /** The name of the index. */
-  name: Scalars['String'];
-  /** The search engine used to create the index. */
-  engine: Scalars['String'];
-  /** The search index created using the selected engine. */
-  index: Scalars['String'];
-  /** A JSON object used to map search results to their data. */
-  store: Scalars['JSON'];
-  /** Save the index to the site's static directory and return a public URL to it. */
-  publicIndexURL: Scalars['String'];
-  /** Save the store to the site's static directory and return a public URL to it. */
-  publicStoreURL: Scalars['String'];
-  id: Scalars['ID'];
-  parent?: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
 };
 
 export type SitePlugin = Node & {
@@ -545,10 +545,10 @@ export type Query = {
   allSiteFunction: SiteFunctionConnection;
   sitePage?: Maybe<SitePage>;
   allSitePage: SitePageConnection;
-  mdx?: Maybe<Mdx>;
-  allMdx: MdxConnection;
   localSearchPages?: Maybe<LocalSearchPages>;
   allLocalSearchPages: LocalSearchPagesConnection;
+  mdx?: Maybe<Mdx>;
+  allMdx: MdxConnection;
   sitePlugin?: Maybe<SitePlugin>;
   allSitePlugin: SitePluginConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
@@ -728,6 +728,28 @@ export type QueryAllSitePageArgs = {
 };
 
 
+export type QueryLocalSearchPagesArgs = {
+  name?: Maybe<StringQueryOperatorInput>;
+  engine?: Maybe<StringQueryOperatorInput>;
+  index?: Maybe<StringQueryOperatorInput>;
+  store?: Maybe<JsonQueryOperatorInput>;
+  publicIndexURL?: Maybe<StringQueryOperatorInput>;
+  publicStoreURL?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllLocalSearchPagesArgs = {
+  filter?: Maybe<LocalSearchPagesFilterInput>;
+  sort?: Maybe<LocalSearchPagesSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryMdxArgs = {
   rawBody?: Maybe<StringQueryOperatorInput>;
   fileAbsolutePath?: Maybe<StringQueryOperatorInput>;
@@ -752,28 +774,6 @@ export type QueryMdxArgs = {
 export type QueryAllMdxArgs = {
   filter?: Maybe<MdxFilterInput>;
   sort?: Maybe<MdxSortInput>;
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryLocalSearchPagesArgs = {
-  name?: Maybe<StringQueryOperatorInput>;
-  engine?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<StringQueryOperatorInput>;
-  store?: Maybe<JsonQueryOperatorInput>;
-  publicIndexURL?: Maybe<StringQueryOperatorInput>;
-  publicStoreURL?: Maybe<StringQueryOperatorInput>;
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
-};
-
-
-export type QueryAllLocalSearchPagesArgs = {
-  filter?: Maybe<LocalSearchPagesFilterInput>;
-  sort?: Maybe<LocalSearchPagesSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -2285,6 +2285,172 @@ export type SitePageSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type LocalSearchPagesConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<LocalSearchPagesEdge>;
+  nodes: Array<LocalSearchPages>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<LocalSearchPagesGroupConnection>;
+};
+
+
+export type LocalSearchPagesConnectionDistinctArgs = {
+  field: LocalSearchPagesFieldsEnum;
+};
+
+
+export type LocalSearchPagesConnectionMaxArgs = {
+  field: LocalSearchPagesFieldsEnum;
+};
+
+
+export type LocalSearchPagesConnectionMinArgs = {
+  field: LocalSearchPagesFieldsEnum;
+};
+
+
+export type LocalSearchPagesConnectionSumArgs = {
+  field: LocalSearchPagesFieldsEnum;
+};
+
+
+export type LocalSearchPagesConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: LocalSearchPagesFieldsEnum;
+};
+
+export type LocalSearchPagesEdge = {
+  next?: Maybe<LocalSearchPages>;
+  node: LocalSearchPages;
+  previous?: Maybe<LocalSearchPages>;
+};
+
+export type LocalSearchPagesFieldsEnum =
+  | 'name'
+  | 'engine'
+  | 'index'
+  | 'store'
+  | 'publicIndexURL'
+  | 'publicStoreURL'
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type';
+
+export type LocalSearchPagesGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<LocalSearchPagesEdge>;
+  nodes: Array<LocalSearchPages>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type LocalSearchPagesFilterInput = {
+  name?: Maybe<StringQueryOperatorInput>;
+  engine?: Maybe<StringQueryOperatorInput>;
+  index?: Maybe<StringQueryOperatorInput>;
+  store?: Maybe<JsonQueryOperatorInput>;
+  publicIndexURL?: Maybe<StringQueryOperatorInput>;
+  publicStoreURL?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type LocalSearchPagesSortInput = {
+  fields?: Maybe<Array<Maybe<LocalSearchPagesFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
 export type MdxConnection = {
   totalCount: Scalars['Int'];
   edges: Array<MdxEdge>;
@@ -2454,172 +2620,6 @@ export type MdxGroupConnection = {
 
 export type MdxSortInput = {
   fields?: Maybe<Array<Maybe<MdxFieldsEnum>>>;
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
-};
-
-export type LocalSearchPagesConnection = {
-  totalCount: Scalars['Int'];
-  edges: Array<LocalSearchPagesEdge>;
-  nodes: Array<LocalSearchPages>;
-  pageInfo: PageInfo;
-  distinct: Array<Scalars['String']>;
-  max?: Maybe<Scalars['Float']>;
-  min?: Maybe<Scalars['Float']>;
-  sum?: Maybe<Scalars['Float']>;
-  group: Array<LocalSearchPagesGroupConnection>;
-};
-
-
-export type LocalSearchPagesConnectionDistinctArgs = {
-  field: LocalSearchPagesFieldsEnum;
-};
-
-
-export type LocalSearchPagesConnectionMaxArgs = {
-  field: LocalSearchPagesFieldsEnum;
-};
-
-
-export type LocalSearchPagesConnectionMinArgs = {
-  field: LocalSearchPagesFieldsEnum;
-};
-
-
-export type LocalSearchPagesConnectionSumArgs = {
-  field: LocalSearchPagesFieldsEnum;
-};
-
-
-export type LocalSearchPagesConnectionGroupArgs = {
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-  field: LocalSearchPagesFieldsEnum;
-};
-
-export type LocalSearchPagesEdge = {
-  next?: Maybe<LocalSearchPages>;
-  node: LocalSearchPages;
-  previous?: Maybe<LocalSearchPages>;
-};
-
-export type LocalSearchPagesFieldsEnum =
-  | 'name'
-  | 'engine'
-  | 'index'
-  | 'store'
-  | 'publicIndexURL'
-  | 'publicStoreURL'
-  | 'id'
-  | 'parent___id'
-  | 'parent___parent___id'
-  | 'parent___parent___parent___id'
-  | 'parent___parent___parent___children'
-  | 'parent___parent___children'
-  | 'parent___parent___children___id'
-  | 'parent___parent___children___children'
-  | 'parent___parent___internal___content'
-  | 'parent___parent___internal___contentDigest'
-  | 'parent___parent___internal___description'
-  | 'parent___parent___internal___fieldOwners'
-  | 'parent___parent___internal___ignoreType'
-  | 'parent___parent___internal___mediaType'
-  | 'parent___parent___internal___owner'
-  | 'parent___parent___internal___type'
-  | 'parent___children'
-  | 'parent___children___id'
-  | 'parent___children___parent___id'
-  | 'parent___children___parent___children'
-  | 'parent___children___children'
-  | 'parent___children___children___id'
-  | 'parent___children___children___children'
-  | 'parent___children___internal___content'
-  | 'parent___children___internal___contentDigest'
-  | 'parent___children___internal___description'
-  | 'parent___children___internal___fieldOwners'
-  | 'parent___children___internal___ignoreType'
-  | 'parent___children___internal___mediaType'
-  | 'parent___children___internal___owner'
-  | 'parent___children___internal___type'
-  | 'parent___internal___content'
-  | 'parent___internal___contentDigest'
-  | 'parent___internal___description'
-  | 'parent___internal___fieldOwners'
-  | 'parent___internal___ignoreType'
-  | 'parent___internal___mediaType'
-  | 'parent___internal___owner'
-  | 'parent___internal___type'
-  | 'children'
-  | 'children___id'
-  | 'children___parent___id'
-  | 'children___parent___parent___id'
-  | 'children___parent___parent___children'
-  | 'children___parent___children'
-  | 'children___parent___children___id'
-  | 'children___parent___children___children'
-  | 'children___parent___internal___content'
-  | 'children___parent___internal___contentDigest'
-  | 'children___parent___internal___description'
-  | 'children___parent___internal___fieldOwners'
-  | 'children___parent___internal___ignoreType'
-  | 'children___parent___internal___mediaType'
-  | 'children___parent___internal___owner'
-  | 'children___parent___internal___type'
-  | 'children___children'
-  | 'children___children___id'
-  | 'children___children___parent___id'
-  | 'children___children___parent___children'
-  | 'children___children___children'
-  | 'children___children___children___id'
-  | 'children___children___children___children'
-  | 'children___children___internal___content'
-  | 'children___children___internal___contentDigest'
-  | 'children___children___internal___description'
-  | 'children___children___internal___fieldOwners'
-  | 'children___children___internal___ignoreType'
-  | 'children___children___internal___mediaType'
-  | 'children___children___internal___owner'
-  | 'children___children___internal___type'
-  | 'children___internal___content'
-  | 'children___internal___contentDigest'
-  | 'children___internal___description'
-  | 'children___internal___fieldOwners'
-  | 'children___internal___ignoreType'
-  | 'children___internal___mediaType'
-  | 'children___internal___owner'
-  | 'children___internal___type'
-  | 'internal___content'
-  | 'internal___contentDigest'
-  | 'internal___description'
-  | 'internal___fieldOwners'
-  | 'internal___ignoreType'
-  | 'internal___mediaType'
-  | 'internal___owner'
-  | 'internal___type';
-
-export type LocalSearchPagesGroupConnection = {
-  totalCount: Scalars['Int'];
-  edges: Array<LocalSearchPagesEdge>;
-  nodes: Array<LocalSearchPages>;
-  pageInfo: PageInfo;
-  field: Scalars['String'];
-  fieldValue?: Maybe<Scalars['String']>;
-};
-
-export type LocalSearchPagesFilterInput = {
-  name?: Maybe<StringQueryOperatorInput>;
-  engine?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<StringQueryOperatorInput>;
-  store?: Maybe<JsonQueryOperatorInput>;
-  publicIndexURL?: Maybe<StringQueryOperatorInput>;
-  publicStoreURL?: Maybe<StringQueryOperatorInput>;
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
-};
-
-export type LocalSearchPagesSortInput = {
-  fields?: Maybe<Array<Maybe<LocalSearchPagesFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
@@ -3005,7 +3005,7 @@ export type LeftSideBarDataQuery = { allMdx: { edges: Array<{ node: { fields?: M
 export type GetAllDocumentsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllDocumentsQuery = { allMdx: { edges: Array<{ node: { fields?: Maybe<Pick<MdxFields, 'slug' | 'title'>>, parent?: Maybe<Pick<File, 'id' | 'name' | 'absolutePath' | 'sourceInstanceName'> | Pick<Directory, 'id'> | Pick<Site, 'id'> | Pick<SiteFunction, 'id'> | Pick<SitePage, 'id'> | Pick<Mdx, 'id'> | Pick<LocalSearchPages, 'id'> | Pick<SitePlugin, 'id'> | Pick<SiteBuildMetadata, 'id'>> } }> } };
+export type GetAllDocumentsQuery = { allMdx: { edges: Array<{ node: { fields?: Maybe<Pick<MdxFields, 'slug' | 'title'>>, parent?: Maybe<Pick<File, 'id' | 'name' | 'absolutePath' | 'sourceInstanceName'> | Pick<Directory, 'id'> | Pick<Site, 'id'> | Pick<SiteFunction, 'id'> | Pick<SitePage, 'id'> | Pick<LocalSearchPages, 'id'> | Pick<Mdx, 'id'> | Pick<SitePlugin, 'id'> | Pick<SiteBuildMetadata, 'id'>> } }> } };
 
 export type MdxBlogPageTemplateQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3025,4 +3025,4 @@ export type MdxDocumentTemplateQueryVariables = Exact<{
 export type MdxDocumentTemplateQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title' | 'docsLocation'>> }>, mdx?: Maybe<(
     Pick<Mdx, 'body' | 'tableOfContents'>
     & { fields?: Maybe<Pick<MdxFields, 'id' | 'title' | 'slug'>>, parent?: Maybe<Pick<File, 'relativePath' | 'sourceInstanceName'>>, frontmatter?: Maybe<Pick<MdxFrontmatter, 'title' | 'metaTitle' | 'metaDescription'>> }
-  )>, allMdx: { edges: Array<{ node: { fields?: Maybe<Pick<MdxFields, 'slug' | 'title'>>, parent?: Maybe<Pick<File, 'id' | 'name' | 'absolutePath' | 'sourceInstanceName'> | Pick<Directory, 'id'> | Pick<Site, 'id'> | Pick<SiteFunction, 'id'> | Pick<SitePage, 'id'> | Pick<Mdx, 'id'> | Pick<LocalSearchPages, 'id'> | Pick<SitePlugin, 'id'> | Pick<SiteBuildMetadata, 'id'>> } }> } };
+  )>, allMdx: { edges: Array<{ node: { fields?: Maybe<Pick<MdxFields, 'slug' | 'title'>>, parent?: Maybe<Pick<File, 'id' | 'name' | 'absolutePath' | 'sourceInstanceName'> | Pick<Directory, 'id'> | Pick<Site, 'id'> | Pick<SiteFunction, 'id'> | Pick<SitePage, 'id'> | Pick<LocalSearchPages, 'id'> | Pick<Mdx, 'id'> | Pick<SitePlugin, 'id'> | Pick<SiteBuildMetadata, 'id'>> } }> } };
