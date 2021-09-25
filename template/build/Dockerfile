@@ -54,4 +54,4 @@ RUN yarn install
 COPY . /app
 
 # Run the development server
-CMD gatsby develop --host 0.0.0.0 --port 9999
+CMD yarn gatsby develop --host 0.0.0.0 --port 9999
