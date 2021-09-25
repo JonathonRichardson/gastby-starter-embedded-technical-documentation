@@ -1,0 +1,63 @@
+---
+title: "Frontmatter"
+metaTitle: ""
+metaDescription: ""
+collapsedByDefault: true
+navOrder: 1
+---
+
+
+# Frontmatter
+
+Each `.mdx` has a special metadata section at the top called [frontmatter](https://www.gatsbyjs.com/docs/mdx/writing-pages/#using-frontmatter-in-mdx):
+
+```
+---
+title: "MDX"
+metaTitle: ""
+metaDescription: ""
+collapsedByDefault: true
+navOrder: 10
+---
+```
+
+The following table lists the available keys in this template:
+
+|Key|Required?|Description|
+|-----|-----------|------------|
+|title|**Yes**|This is the title that will appear in the nav tree side panel, as well as in the tab name and main header of the page.
+|metaTitle|No|Defaults to the title, if not set.  This is added to the `<head>` of the page as meta properties for "title", "og:title", and "twitter:title", and represent the title of the page as would be shown if shared via social media or when sharing links in apps that provide previews for links, like slack.|
+|metaDescription|No|Defaults to "".  This is added as a meta property to the `<head>` of the page and will appear as the summary of the page when sharing it via social media or when previewed by apps that allow previewing links (like slack).|
+|collapsedByDefault|No|Deaults to false.  If set to true, and this page has child pages, this will cause the children to not appear by default in the nav tree, unless the user clicks on this header.|
+|navOrder|No|This controls the order that pages will appear in the nav tree.  Explicitely set values will sort first, in numerical order, followed by everything else sorted alphabetically by title.|
+|date|Yes (only for blog posts)|The date for the blog post.
+## Advanced
+
+The frontmatter section is pretty flexible, and you can add any additional keys you want, which will get picked up by gatsby and added as fields available to query via graphql.  Be careful, though, because they are inferred from usage, which means that if no content has that frontmatter key, it won't exist in the graphql structure and your queries will fail.
+
+Additionally, you need to make sure that you are consistent with your new field's usage, as having some pages set something to a number and others set it to a string will confuse the type inferrer.
+
+However, if you do add a key to one of your documents:
+
+```
+title: "MDX"
+metaTitle: ""
+metaDescription: ""
++ myCustomField: "this is an important piece of metadata"
+collapsedByDefault: true
+navOrder: 10
+```
+
+It will then be available to query on the `mdx`/`allMdx` nodes:
+
+```
+mdx(fields: { id: { eq: $id } }) {
+    body
+    frontmatter {
+        title
+        metaTitle
+        metaDescription
++       myCustomField        
+    }
+}
+```

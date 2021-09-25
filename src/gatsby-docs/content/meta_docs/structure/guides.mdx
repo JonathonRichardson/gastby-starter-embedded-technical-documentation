@@ -1,0 +1,47 @@
+---
+title: "Guides"
+metaTitle: ""
+metaDescription: ""
+collapsedByDefault: true
+navOrder: 10
+---
+
+Guides are what you traditionally think of as documentation.  Each guide has it's own left have structure, and should generally focus on
+one topic.
+
+HTFM ships with a couple default guides that are generally needed by every project:
+
+|Guide Name|Description|
+|----------|-----------|
+|Getting Started|How to set up a development machine and get the project running.|
+|How-Tos|Instructions regarding specific tasks that developers will commonly perform.|
+|HTFM|Meta Documentation on the HTFM project.  If you make customizations, you should update this.|
+
+Other common guides to add might include reference guides, architectural overviews, or style guides.
+
+## Nav Tree
+
+The left nav tree for each book mirrors the directory structure of the underlying source files.  The filename will determine the `slug` for the page, which will be the value displayed in the URL.
+
+You can nest pages by placing them in a folder with the same name as the page you want to nest them under, but without the `.md`/`.mdx` extension.  For instance, to place a new page underneath a page with a filename of `components.tsx`, you would create a folder called `components/` and place your new `.mdx` file in that new folder.
+
+The name of the page will be determined by the `title` attribute in the frontmatter section of that page.  The order that nodes appear is alphabetical by filename, but can be overriden by including a `navOrder` attribute in the frontmatter for that page.  Anything without a `navOrder` will sort after pages with explicit `navOrder` set.
+
+## Adding New pages
+
+To add a new page to a guide, simply create a new `.mdx` file in the directory corresponding to the parent page for you new page.
+
+Make sure to add a frontmatter section with the required title at the top:
+
+```
+---
+title: "New Component Page"
+---
+```
+
+To add subpages, create a directory with the same name as the `.mdx` file you want it to nest under (`search` for `search.mdx`), and add
+pages as normal to this subdirectory.
+
+## Adding New Guides
+
+To add a new guide, create a new directory in `src/gatsby-docs/content/` and add a new entry for the guide to `guides.ts`.
