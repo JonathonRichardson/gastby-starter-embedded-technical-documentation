@@ -5,7 +5,7 @@ import { Layout, Link } from '../components';
 import { BookTile, BookTileSet } from '../components/home/BookTile';
 import { AllBookColors } from '../components/home/BookTile.svg';
 import { GetAllDocumentsQuery } from '../../graphql-types';
-import { Guides, IDocumentInfo } from '../../content/guides';
+import { Documents, IDocumentInfo } from '../../content/docs';
 //#endregion
 
 const forcedNavOrder = [];
@@ -69,7 +69,7 @@ export default class MDXRuntimeTest extends Component {
                                     );
 
                                     let documentInfo: IDocumentInfo | undefined =
-                                        Guides[docname];
+                                        Documents[docname];
 
                                     return (
                                         <React.Fragment key={i}>

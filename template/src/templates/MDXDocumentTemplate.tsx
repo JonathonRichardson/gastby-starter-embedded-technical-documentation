@@ -6,7 +6,7 @@ import { Layout } from '../components/Layout';
 import { NextPrevious } from '../components/NextPrevious';
 import config from '../../config';
 import { Edit, StyledHeading, StyledMainWrapper } from '../components/styles/Docs';
-import { Guides } from '../../content/guides';
+import { Documents } from '../../content/docs';
 import { MdxDocumentTemplateQuery } from '../../graphql-types';
 
 const forcedNavOrder = [];
@@ -86,7 +86,7 @@ export default class DocumentTemplate extends React.Component<IProps> {
             <Layout
                 location=""
                 docName={mdx.parent.sourceInstanceName}
-                docTitle={Guides[mdx.parent.sourceInstanceName].title}
+                docTitle={Documents[mdx.parent.sourceInstanceName].title}
                 hideLeftNav={false}
             >
                 {/* <Helmet2>
