@@ -1,15 +1,23 @@
 ---
-title: "Gatsby Docs"
-metaTitle: "Gatsby Documentation"
+title: "Gatsby as Documentation"
+metaTitle: "Gatsby as Documentation"
 metaDescription: ""
 ---
 
 # Overview
 
-The Gatsby docs is the documentation you are currently reading, if you are reading this.  Gatsby is a utility that takes Markdown, MDX, and javascript, and compiles them into a static website.
+Gatsby is a static site builder that is fast and configurable, allowing you to adapt it to whatever you need.
 
-# Source Control
+It especially makes converting MDX into a navigable site.  This strikes a powerful balance between easy to write 
+documentation that works well in source control (because it's written in MDX, a superset of the popular Markdown
+format) but is still easy to read, and deployable, for bigger projects that would want their documentation to be
+public.
+
+# Notes for Source Control
 
 While each developer could recompile the docs on their machine every time they update, Gatsby can be a little slow to get started, so it's faster and more efficient to both store the input (source of truth) files as well as the compiled output.
 
 This means that if you want to make any updates to the documentation, you should also recompile the docs after doing so, before submitting your PR for review.
+
+A [future effort](https://github.com/JonathonRichardson/gastby-starter-embedded-technical-documentation/issues/6) will write build scripts to make a compiled ZIP archive of the compiled site, as well as metadata, such as a hash of the input files,
+so that build systems can verify that documenation has been re-compiled if it had been updated.

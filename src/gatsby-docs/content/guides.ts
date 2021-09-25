@@ -6,7 +6,7 @@ export type BookCode = 'meta_docs' | 'getting_started' | 'how_tos';
 
 export const Guides: { [key in BookCode]: IDocumentInfo } = {
     meta_docs: {
-        title: 'About the Documentation Site',
+        title: 'HTFM',
     },
     getting_started: {
         title: 'Getting Started',
