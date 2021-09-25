@@ -9,9 +9,9 @@ node_modules
 
 # Ignore the yarn cache (https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored)
 .yarn/*
+!.yarn/cache
 !.yarn/patches
-!.yarn/releases
 !.yarn/plugins
+!.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-.pnp.*
