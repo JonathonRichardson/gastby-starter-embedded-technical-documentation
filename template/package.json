@@ -77,5 +77,8 @@
     "gatsby-plugin-remove-trailing-slashes": "^3.4.0",
     "prettier": "^2.2.1",
     "prism-react-renderer": "^1.2.0"
+  },
+  "installConfig": {
+    "pnp": true
   }
 }
