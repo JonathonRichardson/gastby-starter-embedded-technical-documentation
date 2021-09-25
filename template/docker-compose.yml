@@ -16,4 +16,4 @@ services:
         #     service: app
         #image: ubuntu
         volumes:
-            - './src/gatsby-docs:/app'
+            - '.:/app'

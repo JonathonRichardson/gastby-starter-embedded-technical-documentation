@@ -21,28 +21,6 @@ interface IAccumulatedNodeTree {
     nodes: INode[];
 }
 
-
-// a is after b => +1
-// b is after a => -1
-// equal        => 0
-const sortNodes: (a: INode, b: INode) => number = (a, b) => {
-    // Ensure explicit values of sort order come first
-    if (a.sortOrder !== null && b.sortOrder === null) {
-        return -1;
-    }
-
-    if (b.sortOrder !== null && a.sortOrder === null) {
-        return 1;
-    }
-
-    if (a.sortOrder !== null && b.sortOrder !== null) {
-        return a.sortOrder - b.sortOrder;
-    }
-
-    // Sort nodes without explicit sort orders alphabetically
-    return String.prototype.localeCompare.call(a.label, b.label);
-}
-
 const populateChildNodesFromQueue = (
     nodesToPopulateWithChildren: INode[],
     queueToPopulateFrom: INode[]
@@ -57,7 +35,24 @@ const populateChildNodesFromQueue = (
         if (children.length != 0) {
             populateChildNodesFromQueue(children, queueToPopulateFrom);
 
-            children.sort(sortNodes);
+            // a is after b => +1
+            // b is after a => -1
+            // equal        => 0
+            children.sort((a, b): number => {
+                if (a.sortOrder && !b.sortOrder) {
+                    return -1;
+                }
+
+                if (b.sortOrder && !a.sortOrder) {
+                    return 1;
+                }
+
+                if (a.sortOrder && b.sortOrder) {
+                    return a.sortOrder - b.sortOrder;
+                }
+
+                return String.prototype.localeCompare.call(a.label, b.label);
+            });
 
             nodeToPopulate.children = children;
         }
@@ -115,7 +110,24 @@ const calculateTreeData = (originalData: IRawEdge[]) => {
     // Populate the children
     populateChildNodesFromQueue(rootNodes, otherNodes);
 
-    rootNodes.sort(sortNodes);
+    // a is after b => +1
+    // b is after a => -1
+    // equal        => 0
+    rootNodes.sort((a, b): number => {
+        if (a.sortOrder && !b.sortOrder) {
+            return -1;
+        }
+
+        if (b.sortOrder && !a.sortOrder) {
+            return 1;
+        }
+
+        if (a.sortOrder && b.sortOrder) {
+            return a.sortOrder - b.sortOrder;
+        }
+
+        return String.prototype.localeCompare.call(a.label, b.label);
+    });
 
     const tree: IAccumulatedNodeTree = {
         nodes: rootNodes,

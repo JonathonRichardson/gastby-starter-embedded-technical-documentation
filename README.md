@@ -1,7 +1,9 @@
-# HTFM (Here's the Full Manual)
+# HTFM
 
-To run the project in dev mode:
+To add HTFM to your project, create a `docs` directory and run the following commands there to check out the template:
 
 ```
-docker-compose up gatsby-dev
+git clone --depth 1 --filter=blob:none --no-checkout https://github.com/JonathonRichardson/gastby-starter-embedded-technical-documentation.git .
 ```
+
+git checkout master -- template
