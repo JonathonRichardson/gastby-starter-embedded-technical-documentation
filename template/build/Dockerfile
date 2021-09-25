@@ -44,11 +44,7 @@ RUN npm install -g yarn
 # cached unless those files change.
 RUN mkdir /app
 VOLUME /app
-COPY package.json /app
-COPY yarn.lock /app
-VOLUME /app/node_modules
 WORKDIR /app
-RUN yarn install
 
 # Copy in the main app
 COPY . /app
