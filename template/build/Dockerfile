@@ -44,14 +44,14 @@ RUN npm install -g yarn
 # cached unless those files change.
 RUN mkdir /app
 VOLUME /app
-COPY src/gatsby-docs/package.json /app
-COPY src/gatsby-docs/yarn.lock /app
+COPY package.json /app
+COPY yarn.lock /app
 VOLUME /app/node_modules
 WORKDIR /app
 RUN yarn install
 
 # Copy in the main app
-COPY src/gatsby-docs /app
+COPY . /app
 
 # Run the development server
 CMD gatsby develop --host 0.0.0.0 --port 9999
