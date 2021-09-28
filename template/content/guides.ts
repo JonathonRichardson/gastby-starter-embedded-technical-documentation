@@ -1,17 +1,40 @@
-export interface IGuideInfo {
-    title: string;
+import { ICustomizerFunction, IHTFMConfiguration } from '../src/config/ICustomizer';
+
+export const customize: ICustomizerFunction = (customizer) => {
+    customizer.setConfig({
+        titleBar: {
+            mainTitle: 'HTFM',
+            subTitle: 'Project/Developer Documentation',
+        },
+    });
+
+    customizer.updateConfig((curSettings: IHTFMConfiguration) => {
+        let updatedSettings: IHTFMConfiguration = {
+            ...curSettings,
+            titleBar: {
+                ...curSettings.titleBar,
+                mainTitle: 'HTFM',
+            },
+        };
+
+        return updatedSettings;
+    });   
+    
+    customizer.registerGuide({
+        title: 'Getting Started',
+        location: 'getting_started',
+    });
+
+    customizer.registerGuide({
+        title: 'How-Tos',
+        location: 'how_tos',
+    });
 }
 
-export type GuideCode = 'meta_docs' | 'getting_started' | 'how_tos';
+// export const customize = (registerGuide: (guideInfo: IGuideInfo) => void) => {
+//     registerGuide({
+//         title: 'HTFM',
+//         location: 'meta_docs',
+//     });
 
-export const Guides: { [key in GuideCode]: IGuideInfo } = {
-    meta_docs: {
-        title: 'HTFM',
-    },
-    getting_started: {
-        title: 'Getting Started',
-    },
-    how_tos: {
-        title: 'How-Tos',
-    },
-};
+// };

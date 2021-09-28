@@ -6,8 +6,8 @@ import { Layout } from '../components/Layout';
 import { NextPrevious } from '../components/NextPrevious';
 import config from '../../config';
 import { Edit, StyledHeading, StyledMainWrapper } from '../components/styles/Docs';
-import { Guides } from '../../content/guides';
 import { MdxDocumentTemplateQuery } from '../../graphql-types';
+import { getGlobalHTFMConfiguration } from '../config/HTFMConfigurationBuilder';
 
 const forcedNavOrder = [];
 const Helmet2 = Helmet as any as React.Component<{}>;
@@ -82,11 +82,14 @@ export default class DocumentTemplate extends React.Component<IProps> {
                 : canonicalUrl;
         canonicalUrl = canonicalUrl + (mdx ? mdx.fields.slug : '');
 
+        const HTFMConfig = getGlobalHTFMConfiguration();
+        let guide = HTFMConfig.getGuides().find(guide => guide.documentCode == mdx.parent.sourceInstanceName);
+
         return (
             <Layout
                 location=""
                 docName={mdx.parent.sourceInstanceName}
-                docTitle={Guides[mdx.parent.sourceInstanceName].title}
+                docTitle={guide ? guide.title : mdx.parent.sourceInstanceName}
                 hideLeftNav={false}
             >
                 {/* <Helmet2>

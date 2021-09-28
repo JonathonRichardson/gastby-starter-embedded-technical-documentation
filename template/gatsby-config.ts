@@ -15,25 +15,18 @@ const plugins: GatsbyConfig['plugins'] = [
 ];
 
 // Now, add a "gatsby-source-filesystem" plugin for each document.
-import { Guides } from './content/guides';
+import { getGlobalHTFMConfiguration } from './src/config/HTFMConfigurationBuilder';
+const HTFMConfig = getGlobalHTFMConfiguration();
 
-for (let document_code in Guides) {
+for (let guide of HTFMConfig.getGuides()) {
     plugins.push({
         resolve: 'gatsby-source-filesystem',
         options: {
-            name: document_code,
-            path: `${__dirname}/content/${document_code}/`,
+            name: guide.documentCode,
+            path: guide.absolutePath,
         },
     });
 }
-
-plugins.push({
-    resolve: 'gatsby-source-filesystem',
-    options: {
-        name: 'blog',
-        path: `${__dirname}/content/blog/`,
-    },
-});
 
 plugins.push({
     resolve: 'gatsby-plugin-mdx',

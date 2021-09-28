@@ -12,7 +12,7 @@ This is only really valuable if you want to hack on the starter/template itself.
 
 # Overview
 
-The `gatsby-config.ts` iterates over all the guides defined in the `content/guides.ts`, as well as the blog folder (which is hard coded there), and adds those folders with the `gatsby-source-filesystem`.  This makes these files available in graphql under the top level object `allFile`.
+The `gatsby-config.ts` iterates over all the guides registered in the `content/guides.ts`, as well as the blog folder (which is hard coded there), and adds those folders with the `gatsby-source-filesystem`.  This makes these files available in graphql under the top level object `allFile`.
 
 Then, we also include the `gatsby-plugin-mdx`, which maps these into the `allMdx` node in graphql.
 

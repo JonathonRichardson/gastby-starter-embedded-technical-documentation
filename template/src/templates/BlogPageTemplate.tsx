@@ -6,7 +6,6 @@ import { Layout } from '../components/Layout';
 import { NextPrevious } from '../components/NextPrevious';
 import config from '../../config';
 import { Edit, StyledHeading, StyledMainWrapper } from '../components/styles/Docs';
-import { Guides } from '../../content/guides';
 import { MdxBlogPageTemplateQuery } from '../../graphql-types';
 
 const forcedNavOrder = [];

@@ -5,11 +5,10 @@ import { Layout, Link } from '../components';
 import { BookTile, BookTileSet } from '../components/home/BookTile';
 import { AllBookColors } from '../components/home/BookTile.svg';
 import { GetAllDocumentsQuery } from '../../graphql-types';
-import { Guides, IGuideInfo } from '../../content/guides';
+import { getGlobalHTFMConfiguration } from '../config/HTFMConfigurationBuilder';
 //#endregion
 
 const forcedNavOrder = [];
-
 export default class MDXRuntimeTest extends Component {
     render() {
         return (
@@ -68,8 +67,9 @@ export default class MDXRuntimeTest extends Component {
                                             edge.node.parent.sourceInstanceName == docname
                                     );
 
-                                    let documentInfo: IGuideInfo | undefined =
-                                        Guides[docname];
+                                    const HTFMConfig = getGlobalHTFMConfiguration();
+
+                                    let documentInfo = HTFMConfig.getGuides().find(guide => guide.documentCode == docname);
 
                                     return (
                                         <React.Fragment key={i}>

@@ -4,7 +4,6 @@ import { ThemeProvider as EmotionThemeProvider, Global, css } from '@emotion/rea
 import { lightTheme, darkTheme } from './index';
 import { Header } from '../Header';
 import { baseStyles } from '../styles/GlobalStyles';
-import { styles } from '../../custom/styles/styles';
 //#endregion
 
 interface IProps {
@@ -51,7 +50,7 @@ export class ThemeProvider extends React.Component<IProps, IState> {
 
         return (
             <div>
-                <Global styles={[baseStyles, ...styles]} />
+                <Global styles={[baseStyles]} />
                 <Header
                     location={location}
                     isDarkThemeActive={isDarkThemeActive}
